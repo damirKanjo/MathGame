@@ -1,9 +1,9 @@
 let rezultat;                /** Resenje zadatka  */
 let i = -1;                   /** Tacni odgovori */
-let sledeciIzraz = 0;        /** Detektovanje prelaska na sledeci zadatak */
 let odgovor = 0;             /** Sluzi da bi se ukoliko neko vise puta pritisne submit sa tacnim odgovorom dobije samo 1 poen */
 let blokada = 0;
 let skiniPoen = 0;
+let pomoc = 0;
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -26,23 +26,20 @@ function randomBroj() {
     document.getElementById("resenje").innerHTML = "Check result";
     odgovor = 0;
     blokada = 0;
+    pomoc = 0;
     console.log(i, blokada, odgovor);
-    resenje();
 }
 
 function myFunction() {
-    let y;
-    let stara;
-    stara = y;
     let skup = document.getElementsByClassName("krug");
     let x = document.getElementById("numb").value;
     let text;
 
-    if (x === "") {
-        text = "Enter your answer and try again!";
+    if (x === "" || isNaN(x)) {
+        text = "Enter the number and try again!";
     }
     /** Proverava se uneti rezultat sa tacnim, shodno tome dobija se zelena ili crvena pozadina i odgovarajuca poruka*/
-    else if (isNaN(x) || x != rezultat && blokada == 0) {
+    else if (x != rezultat && blokada == 0) {
         text = "Wrong answer, try again!"
         prozor.style.backgroundColor = "#FF2121";
         if(i == -1)
@@ -57,7 +54,7 @@ function myFunction() {
     } 
     else {
         skiniPoen = 0;
-        if(odgovor == 0) {
+        if(odgovor == 0 && pomoc == 0) {
             text = "Corect!";
             prozor.style.backgroundColor = "lightgreen";
             i = i + 1;
@@ -87,16 +84,26 @@ function myFunction() {
             prozor.innerHTML = "WELL DONE!"
         }
     } else {i=i;}
-    console.log(i, blokada, odgovor);
+    console.log(i, pomoc);
 }
 
 function resenje() {
     let res = rezultat.toString();
-    document.getElementById("resenje").innerHTML = res;
-    // if (odgovor == 1) {
-    //     odgovor = odgovor;
-    // }
-    // else {
-    //     odgovor = 1;
-    // }
+    let upis = document.getElementById("resenje");
+    upis.innerHTML = res;
+    pomoc = 1;
+    i == 5 ? upis.innerHTML = 'GO NEXT!' : upis.innerHTML = res;;
+}
+
+
+function prelazakLevela() {
+    document.querySelector(".checkBox").style.display = 'none';
+    document.querySelector(".frame").style.display = 'none';
+    document.querySelector(".result").style.display = 'none';
+    document.body.style.background = "pink";
+    let height = window.innerHeight;;
+    let polaVisine = (height / 2) - 100;
+    document.body.style.paddingTop = polaVisine + "px";
+    document.querySelector(".loader").style.display = 'block';
+    console.log(height, polaVisine)
 }
