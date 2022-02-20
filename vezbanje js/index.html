@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="zadatak.css">
+        <script src="zadatak.js"></script>
+    </head>
+
+    <body onload = "randomBroj()">
+
+        <div class="box">
+            <div class="checkBox">
+                <h1 id="topNaslov"> Math game </h1>
+                <h2> LEVEL 1 </h2>
+                <p> Enter your result in the field beneath. </p>
+                <p id = "brojevi"></p>
+                <input id = "numb"><br>
+                <button type="button" onclick="myFunction()">Submit</button>
+                <button type="button" onclick = "randomBroj()">Next ></button>
+                <p id = "demo"></p>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="frame">
+                <h1 id="poruka"></h1>
+
+                <span class="krug"></span>
+                <span class="krug"></span>
+                <span class="krug"></span>
+                <span class="krug"></span>
+                <span class="krug"></span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="result" onclick="resenje()">
+                <h1 id="resenje"> Check result </h1>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,122 @@
+body {
+    background: rgb(255, 114, 32);
+}
+.box {
+    position: relative;
+    width: 80%;
+    margin: 0 10% 50px 10%;
+    box-sizing:border-box;
+}
+.checkBox {
+    height: 300px;
+    width: 500px;
+    margin: auto;
+    text-align: center;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+#numb {
+    margin-bottom: 10px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px 0;
+}
+
+#demo {
+    margin-top: 10px;
+}
+button {
+    width: 80px;
+    height: 50px;
+    border: none;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
+    background: darkcyan;
+    color: beige;
+    border-radius: 5px;
+}
+button:hover {
+    background: aquamarine;
+    transition: 0.3s;
+    color: black;
+}
+
+.frame {
+    width: 500px;
+    box-sizing: content-box;
+    margin: auto;
+    background: rgb(83, 200, 247);
+    border-radius: 50px;
+    text-align: center;
+    transition: .5s;
+}
+h1#poruka {
+    display: none;
+    margin: 0;
+    font-size: 30px;
+    padding: 35px 0;
+    color: rgb(18 74 116);
+    border-radius: 50px;
+    width: 100%;
+    box-sizing: border-box;
+}
+h1#poruka:hover {
+    width: 100%;
+    color: white;
+    background-image: linear-gradient(to right,rgb(68, 0, 255) , rgb(255, 0, 242) 45%, white 100%);
+}
+.krug {
+    display: inline-block;
+    background-color: rgb(247, 247, 247);
+    height: 50px;
+    width: 50px;
+    margin: 25px 5px;
+    border-radius: 50%;
+    transition: transform .2s;
+}
+
+
+
+
+.result {
+    width: 500px;
+    box-sizing: content-box;
+    margin: auto;
+    background: rgb(22, 70, 88);
+    padding: 5px 0;
+    text-align: center;
+    border-radius: 5px;
+    color:rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+
+.grad {
+    background-image: linear-gradient(to right, red , blue);
+  }
+
+
+  @media only screen and (max-width: 800px) {
+    .box {
+        width: 90%;
+        margin: 0 5% 50px 5%;
+    }
+    .checkBox {
+        width: 100%;
+        min-width: 300px;
+    }
+    .frame {
+        width: 100%;
+        min-width: 300px;
+    }
+    .krug {
+        height: 40px;
+        width: 40px;
+    }
+    .result {
+        width: 100%;
+        min-width: 300px;
+    }
+}
