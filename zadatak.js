@@ -4,6 +4,8 @@ let odgovor = 0;             /** Sluzi da bi se ukoliko neko vise puta pritisne 
 let blokada = 0;
 let skiniPoen = 0;
 let pomoc = 0;
+let timeout;
+let level = 1; 
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -12,6 +14,8 @@ document.addEventListener("keyup", function(event) {
 });
 
 function randomBroj() {
+    document.querySelector(".prvi").style.display = 'none';
+    document.getElementById("level").innerHTML = ' Level ' + level;
     /** Brise rezultat iz kutije i poruku */
     document.getElementById("numb").value = '';
     document.getElementById("demo").innerHTML = '';
@@ -27,11 +31,13 @@ function randomBroj() {
     odgovor = 0;
     blokada = 0;
     pomoc = 0;
-    console.log(i, blokada, odgovor);
+
+    console.log(i);
 }
 
+let skup = document.getElementsByClassName("krug");
+
 function myFunction() {
-    let skup = document.getElementsByClassName("krug");
     let x = document.getElementById("numb").value;
     let text;
 
@@ -71,17 +77,11 @@ function myFunction() {
 
     if(i == 4) {
         for(i = 0; i < skup.length; i++){
-            skup[i].style.transform = "scale(1.9)";
-            let nextLevel = document.getElementById("poruka")
-            nextLevel.style.display = 'block';
-            nextLevel.innerHTML = 'NEXT LEVEL >>>';
-            let promena = document.querySelector(".frame");
-            promena.style.backgroundColor = "yellow";
-            promena.style.cursor = "pointer";
+            document.querySelector(".drugi").style.display = 'none';
+            document.querySelector(".prvi").style.display = 'block';
             skup[i].style.display = 'none';
-            prozor.innerHTML = "";
-            prozor.style.backgroundColor = "rebekapurple";
-            prozor.innerHTML = "WELL DONE!"
+            document.querySelector(".checkBox").style.display = 'none';
+            document.querySelector(".uNoviLevel").style.display ='block';
         }
     } else {i=i;}
     console.log(i, pomoc);
@@ -97,13 +97,40 @@ function resenje() {
 
 
 function prelazakLevela() {
-    document.querySelector(".checkBox").style.display = 'none';
-    document.querySelector(".frame").style.display = 'none';
+    document.querySelector(".uNoviLevel").style.display ='none';
+    document.querySelector(".prvi").style.display = 'none';
     document.querySelector(".result").style.display = 'none';
-    document.body.style.background = "pink";
-    let height = window.innerHeight;;
-    let polaVisine = (height / 2) - 100;
-    document.body.style.paddingTop = polaVisine + "px";
+
+    let height = parent.innerHeight;
+    let visina = (height - 100) / 2;
+    let prelaz = document.querySelector(".prelazak");
+    prelaz.style.paddingTop = visina + 'px';
+    prelaz.style.height = height + "px";
+    prelaz.style.display = 'block';
+    prelaz.style.background = "cyan";
+
+    document.querySelector(".prelazak").style.display = 'block';
     document.querySelector(".loader").style.display = 'block';
-    console.log(height, polaVisine)
+
+    level = level + 1;
+    setTimeout(sledeciLevel, 5000);
+}
+
+function sledeciLevel() {
+    document.querySelector(".prelazak").style.display = 'none';
+    document.querySelector(".loader").style.display = 'none';
+
+    document.querySelector(".checkBox").style.display = 'block';
+    document.querySelector(".drugi").style.display = 'block';
+    i = 0;
+    for(i = 0; i <= 4; i++) {
+        skup[i].style.display = 'inline-block';
+        skup[i].style.backgroundColor = "white";
+    }
+
+    document.querySelector(".result").style.display = 'block';
+    document.getElementById("resenje").innerHTML = "Check result";
+    i = -1;
+    randomBroj();
+    console.log(i);
 }

@@ -1,18 +1,29 @@
+html {
+    width: 100%;
+    height: 100%;
+}
 body {
-    background: rgb(255, 114, 32);
     transition: 3s;
+    margin: 0;
+    background: rgb(11, 16, 59);
+}
+.prelazak {
+    display: none;
+    width: 100%;
+    z-index: 111;
     text-align: center;
-    vertical-align: middle;
+    box-sizing: border-box;
 }
 .loader {
     display: none;
     z-index: 100;
     width: 10px;
-    height: 100px;
+    height: 10px;
+    padding: 50px 0;
     margin: auto;
     border-radius: 5px;
     background: darkblue;
-    animation: spin 5s linear 1.5s infinite;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
@@ -35,7 +46,16 @@ body {
     border-radius: 5px;
     transition: .3s;
 }
-
+.uNoviLevel {
+    display: none;
+    border-radius: 5px;
+    height: 300px;
+    width: 500px;
+    margin: auto;
+    background: hotpink;
+    text-align: center;
+    box-sizing: content-box;
+}
 #numb {
     margin-bottom: 10px;
     border-radius: 20px;
@@ -63,27 +83,28 @@ button:hover {
     color: black;
 }
 
-.frame {
-    width: 500px;
-    box-sizing: content-box;
-    margin: auto;
-    background: rgb(83, 200, 247);
-    border-radius: 50px;
-    text-align: center;
-    transition: .5s;
-}
-h1#poruka {
-    display: none;
+h1#rem {
     margin: 0;
-    font-size: 30px;
-    padding: 35px 0;
-    color: rgb(18 74 116);
-    border-radius: 50px;
-    width: 100%;
-    box-sizing: border-box;
 }
-h1#poruka:hover {
-    width: 100%;
+.prvi {
+    margin: auto;
+    width: 500px;
+    height: 100px;
+    cursor: pointer;
+    background-color: yellow;
+    text-align: center;
+    border-radius: 50px;
+}
+.drugi {
+    margin: auto;
+    width: 500px;
+    height: 100px;
+    border-radius: 50px;
+    background: rgb(83, 200, 247);
+    text-align: center;
+    /* color: rgb(18 74 116); */
+}
+.prvi:hover {
     color: white;
     background-image: linear-gradient(to right,rgb(68, 0, 255) , rgb(255, 0, 242) 45%, white 100%);
 }
@@ -94,7 +115,8 @@ h1#poruka:hover {
     width: 50px;
     margin: 25px 5px;
     border-radius: 50%;
-    transition: transform .2s;
+    transition: 1.5s;
+    border: 1px solid rgb(11, 16, 59);;
 }
 
 .result {
@@ -108,14 +130,16 @@ h1#poruka:hover {
     color:rgb(255, 255, 255);
     cursor: pointer;
 }
-
+.result:hover {
+    background: linear-gradient( to bottom right, white , rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.1) 70% , rgb(255, 255, 255));
+}
 
 @media only screen and (max-width: 800px) {
     .box {
         width: 90%;
         margin: 0 5% 50px 5%;
     }
-    .checkBox, .frame, .result {
+    .checkBox, .prvi, .drugi, .result {
         width: 100%;
         margin: 25px auto;
     }
