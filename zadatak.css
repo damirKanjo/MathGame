@@ -46,15 +46,20 @@ body {
     border-radius: 5px;
     transition: .3s;
 }
+.lejer {
+    z-index: 5;
+}
 .uNoviLevel {
     display: none;
     border-radius: 5px;
+    padding-top: 120px;
     height: 300px;
     width: 500px;
     margin: auto;
-    background: hotpink;
+    margin-top: 20px;
+    background: rgb(31, 238, 76);
     text-align: center;
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
 #numb {
     margin-bottom: 10px;
@@ -90,10 +95,12 @@ h1#rem {
     margin: auto;
     width: 500px;
     height: 100px;
+    padding-top: 30px;
     cursor: pointer;
-    background-color: yellow;
+    background-color: rgb(255, 255, 75);
     text-align: center;
     border-radius: 50px;
+    box-sizing: border-box;
 }
 .drugi {
     margin: auto;
@@ -135,22 +142,60 @@ h1#rem {
 }
 
 .podeok {
+    z-index: 1;
     display: inline-block;
     width: 250px;
-    height: 100px;
+    height: 245px;
     margin: 0;
     padding: 0;
+    border-radius: 20px;
     vertical-align: top;
     background: honeydew;
+}
+.pod1 {
+    float: left;
+}
+.pod2 {
+    float: right;
+}
+.pozicija {
+    position: fixed;
+    top: 50px;
+}
+
+@media only screen and (max-width: 1300px) {
+    .pozicija {
+        position: relative;
+        top: 0;
+    }
+    .podeok {
+        height: 100px;
+        width: 250px;
+        border-radius: 0;
+    }
+    .pod1 {
+        float: none;
+        border-radius: 5px 0 0 5px;
+    }
+    .pod2 {
+        float: none;
+        border-radius: 0 5px 5px 0;
+    }
 }
 
 @media only screen and (max-width: 800px) {
     .box {
         width: 90%;
-        margin: 0 5% 50px 5%;
+        margin: 0 5% 10px 5%;
     }
-    .checkBox, .prvi, .drugi, .result, .podeok {
+    .checkBox, .prvi, .drugi, .result, .uNoviLevel{
         width: 100%;
-        margin: 25px auto;
+        margin: 0 auto;
+    }
+    .uNoviLevel {
+        margin-top: 20px;
+    }
+    .podeok {
+        width: 50%;
     }
 } 
