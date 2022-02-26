@@ -6,6 +6,7 @@ let skiniPoen = 0;
 let pomoc = 0;
 let timeout;
 let level = 1; 
+let nivo = 0;
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -14,6 +15,8 @@ document.addEventListener("keyup", function(event) {
 });
 
 function randomBroj() {
+    let a;
+    let b;
     document.querySelector(".prvi").style.display = 'none';
     document.getElementById("level").innerHTML = ' Level ' + level;
     /** Brise rezultat iz kutije i poruku */
@@ -23,10 +26,21 @@ function randomBroj() {
     /** Vraca boju kutije iz zelene/crvvene nazad u neutralnu-belu */
     prozor.style.backgroundColor = "white";
     /** Biraju se random brojevi, ispisuje se poruka sa upitom koliki je njihov zbir*/
-    let a = Math.floor(Math.random() * 101);
-    let b = Math.floor(Math.random() * 101);
-    rezultat = a + b;
-    document.getElementById("brojevi").innerHTML = 'What is the sum of ' + ' ' + a + ' ' + b + '?';
+    switch(nivo)
+    {
+        case 0:
+        a = Math.floor(Math.random() * 101);
+        b = Math.floor(Math.random() * 101);
+        rezultat = a + b;
+        document.getElementById("brojevi").innerHTML = 'What is the sum of ' + ' ' + a + ' ' + b + '?';
+        break;
+        case 0:
+        a = Math.floor(Math.random() * 10) + 1;
+        b = Math.floor(Math.random() * 10) + 1;
+        rezultat = a * b;
+        document.getElementById("brojevi").innerHTML = 'What is the product of ' + ' ' + a + ' ' + b + '?';
+        break;
+    }
     document.getElementById("resenje").innerHTML = "Check result";
     odgovor = 0;
     blokada = 0;

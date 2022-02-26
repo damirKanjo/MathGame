@@ -134,12 +134,22 @@ h1#rem {
     background: linear-gradient( to bottom right, white , rgba(255,255,255,0.1) 30%, rgba(255,255,255,0.1) 70% , rgb(255, 255, 255));
 }
 
+.podeok {
+    display: inline-block;
+    width: 250px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    background: honeydew;
+}
+
 @media only screen and (max-width: 800px) {
     .box {
         width: 90%;
         margin: 0 5% 50px 5%;
     }
-    .checkBox, .prvi, .drugi, .result {
+    .checkBox, .prvi, .drugi, .result, .podeok {
         width: 100%;
         margin: 25px auto;
     }
