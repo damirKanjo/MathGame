@@ -23,12 +23,7 @@ body {
     border-radius: 5px;
     background: darkblue;
 }
-#playAgain {
-    display: none;
-    width: 100px;
-    height: 50px;
-    margin: auto;
-}
+
 .loadFirst {
     animation: spin 5s linear infinite;
 }
@@ -112,6 +107,14 @@ button:hover {
     background: aquamarine;
     transition: 0.3s;
     color: black;
+}
+
+
+#playAgain {
+    display: none;
+    width: 100px;
+    height: 50px;
+    margin: auto;
 }
 
 h1#rem {

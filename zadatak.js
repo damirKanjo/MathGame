@@ -16,6 +16,7 @@ let ukupnoPokusaja = 0;      // totali broj pokusaja u svim levelima
 let bezOdgovora = 0;           // ove dve su za brojanje preskoka bez odgovora
 let preskoceno = -1;
 
+
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         myFunction();
@@ -37,7 +38,6 @@ function randomBroj() {
     /** Vraca boju kutije iz zelene/crvvene nazad u neutralnu-belu */
     prozor.style.backgroundColor = "white";
     /** Biraju se random brojevi, ispisuje se poruka sa upitom koliki je njihov zbir*/
-    
     switch(nivo)
     {
         case 0:
@@ -171,7 +171,7 @@ function prelazakLevela() {
     document.querySelector(".pod2").style.display = 'none';
 
     let height = parent.innerHeight;
-    let visina = (height - 100) / 2;
+    let visina = (height / 2) - 87 ;
     let prelaz = document.querySelector(".prelazak");
     prelaz.style.paddingTop = visina + 'px';
     prelaz.style.height = height + "px";
