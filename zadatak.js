@@ -60,8 +60,8 @@ function randomBroj() {
         break;
 
         case 2:
-            a = Math.floor(Math.random() * 10) + 1;
-            b = Math.floor(Math.random() * 10) + 1;
+            a = Math.floor(Math.random() * 30) + 1;
+            b = Math.floor(Math.random() * 30) + 1;
             rezultat = a * b;
             document.getElementById("brojevi").innerHTML = 'What is the product of ' + ' ' + a + ' ' + b + '?'; 
         break;
