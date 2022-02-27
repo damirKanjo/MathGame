@@ -198,7 +198,7 @@ function prelazakLevela() {
         document.getElementById("loadLevel").innerHTML = '';
         let zbir = ukupnoPokusaja-20;
         document.getElementById("loadLevel").innerHTML = '“Congratulations and BRAVO!”' + "<br>" + "<br>"
-                                                         + 'Your total hits are: ' + ukupnoPokusaja + "/20" + "<br>"
+                                                         + 'Your total hints are: ' + ukupnoPokusaja + "/20" + "<br>"
                                                         +"which means you made " + zbir + " mistakes!" + "<br>"
                                                          +'Times you skiped task without answering: ' + preskoceno;
         document.getElementById("playAgain").style.display = 'block';
