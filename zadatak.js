@@ -2,16 +2,19 @@ let rezultat;                /** Resenje zadatka  */
 let i = -1;                   /** Tacni odgovori */
 let odgovor = 0;             /** Sluzi da bi se ukoliko neko vise puta pritisne submit sa tacnim odgovorom dobije samo 1 poen */
 let blokada = 0;
-let skiniPoen = 0;
-let pomoc = 0;
-let timeout;
-let level = 1; 
-let nivo = 0;
-let a;
-let b;
-let pokusaj = 0;
-let j = 0;
-let ukupnoPokusaja = 0;
+
+let skiniPoen = 0;           //skida samo 1 poen kada se unese netacan odgovor
+let pomoc = 0;               // korisnik je pogledao rezultat u checkboxu, poen se ne dobija
+let level = 1;               // broj levela na kome se nalazi igrac
+let nivo = 0;                // broj nivoa koji treba da se ucita shodno napretku
+let a;                       // random broj
+let b;                       //random broj
+let pokusaj = 0;             // broj pokusaja tokom levela
+let j = 0;                   // upisivanje trenutnog rezultata u polje YOUR SCORE 
+let ukupnoPokusaja = 0;      // totali broj pokusaja u svim levelima
+
+let bezOdgovora = 0;           // ove dve su za brojanje preskoka bez odgovora
+let preskoceno = -1;
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -24,6 +27,9 @@ function randomBroj() {
     document.getElementById("level").innerHTML = ' Level ' + level;
     document.getElementById("pokusaj").innerHTML = 'Hints' + "<br>" + pokusaj;
     document.getElementById("rezultat").innerHTML = 'Your score' + "<br>" + j+'/5';
+
+    bezOdgovora == 0 && document.getElementById("numb").value == '' ? preskoceno++ : bezOdgovora == 1;
+    bezOdgovora = 0;
     /** Brise rezultat iz kutije i poruku */
     document.getElementById("numb").value = '';
     document.getElementById("demo").innerHTML = '';
@@ -75,6 +81,7 @@ function randomBroj() {
     odgovor = 0;
     blokada = 0;
     pomoc = 0;
+    console.log(preskoceno, pokusaj);
 }
 
 let skup = document.getElementsByClassName("krug");
@@ -82,9 +89,11 @@ let skup = document.getElementsByClassName("krug");
 function myFunction() {
     let x = document.getElementById("numb").value;
     let text;
+    bezOdgovora = 1;
 
     if (x === "" || isNaN(x)) {
         text = "Enter the number and try again!";
+        prozor.style.backgroundColor = "white";
     }
     /** Proverava se uneti rezultat sa tacnim, shodno tome dobija se zelena ili crvena pozadina i odgovarajuca poruka*/
     else if (x != rezultat && blokada == 0) {
@@ -100,8 +109,9 @@ function myFunction() {
             skiniPoen = 1;
             j == 0 ? j = 0 : j -= 1;
         }
-        pokusaj += 1;
         ukupnoPokusaja +=1;
+        bezOdgovora = 1;
+        pokusaj += 1;
     } 
     else {
         skiniPoen = 0;
@@ -115,6 +125,7 @@ function myFunction() {
             pokusaj += 1;
             ukupnoPokusaja +=1;
             j +=1;
+            bezOdgovora = 1;
         }
         else { 
             text = "Click 'Next' for another pair of numbers."
@@ -150,6 +161,7 @@ function prelazakLevela() {
     pokusaj = 0;
     nivo += 1;
     level += 1;
+    preskoceno = preskoceno - 1;
     j = 0;
 
     document.querySelector(".uNoviLevel").style.display ='none';
@@ -178,16 +190,21 @@ function prelazakLevela() {
     else {
         level = 1;
         nivo = 0;
-        ukupnoPokusaja = 0;
+        preskoceno = preskoceno + 1;
         prelaz.style.paddingTop = (visina-50) + 'px';
         document.querySelector(".loadFirst").style.display = 'none';
         document.querySelector(".loadSecond").style.display = 'none';
         document.querySelector(".loadThird").style.display = 'none';
         document.getElementById("loadLevel").innerHTML = '';
         let zbir = ukupnoPokusaja-20;
-        document.getElementById("loadLevel").innerHTML = '“Congratulations and BRAVO!”' + "<br>" + "<br>" + 'Your total hits are: ' + ukupnoPokusaja + "/20" + "<br>" +"which means you made " + zbir + " mistakes!";
+        document.getElementById("loadLevel").innerHTML = '“Congratulations and BRAVO!”' + "<br>" + "<br>"
+                                                         + 'Your total hits are: ' + ukupnoPokusaja + "/20" + "<br>"
+                                                        +"which means you made " + zbir + " mistakes!" + "<br>"
+                                                         +'Times you skiped task without answering: ' + preskoceno;
         document.getElementById("playAgain").style.display = 'block';
         document.getElementById("playAgain").innerHTML = "PLAY AGAIN";
+        ukupnoPokusaja = 0;
+        preskoceno = 0;
     }
 }
 

@@ -214,6 +214,9 @@ h1#rem {
         width: 90%;
         margin: 0 5% 10px 5%;
     }
+    .loader {
+        margin: 35px;
+    }
     .checkBox, .prvi, .drugi, .result, .uNoviLevel{
         width: 100%;
         margin: 0 auto;
