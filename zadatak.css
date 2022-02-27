@@ -24,6 +24,13 @@ body {
     background: darkblue;
 }
 
+#playAgain {
+    display: none;
+    width: 100px;
+    height: 50px;
+    margin: auto;
+}
+
 .loadFirst {
     animation: spin 5s linear infinite;
 }
@@ -109,14 +116,6 @@ button:hover {
     color: black;
 }
 
-
-#playAgain {
-    display: none;
-    width: 100px;
-    height: 50px;
-    margin: auto;
-}
-
 h1#rem {
     margin: 0;
 }
@@ -190,6 +189,15 @@ h1#rem {
 .pozicija {
     position: fixed;
     top: 50px;
+}
+
+@media only screen and (min-width: 2400px) {
+    .pod1 {
+        margin-left: 29%;
+    }
+    .pod2 {
+        margin-right: 29%;
+    }
 }
 
 @media only screen and (max-width: 1300px) {
