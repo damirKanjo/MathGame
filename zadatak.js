@@ -11,6 +11,7 @@ let a;
 let b;
 let pokusaj = 0;
 let j = 0;
+let ukupnoPokusaja = 0;
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -21,7 +22,7 @@ document.addEventListener("keyup", function(event) {
 function randomBroj() {
     document.querySelector(".prvi").style.display = 'none';
     document.getElementById("level").innerHTML = ' Level ' + level;
-    document.getElementById("pokusaj").innerHTML = 'Total hints' + "<br>" + pokusaj;
+    document.getElementById("pokusaj").innerHTML = 'Hints' + "<br>" + pokusaj;
     document.getElementById("rezultat").innerHTML = 'Your score' + "<br>" + j+'/5';
     /** Brise rezultat iz kutije i poruku */
     document.getElementById("numb").value = '';
@@ -30,50 +31,50 @@ function randomBroj() {
     /** Vraca boju kutije iz zelene/crvvene nazad u neutralnu-belu */
     prozor.style.backgroundColor = "white";
     /** Biraju se random brojevi, ispisuje se poruka sa upitom koliki je njihov zbir*/
+    
     switch(nivo)
     {
         case 0:
-        a = Math.floor(Math.random() * 101);
-        b = Math.floor(Math.random() * 101);
-        rezultat = a + b;
-        document.getElementById("brojevi").innerHTML = 'What is the sum of ' + ' ' + a + ' ' + b + '?';
+            a = Math.floor(Math.random() * 101);
+            b = Math.floor(Math.random() * 101);
+            rezultat = a + b;
+            document.getElementById("brojevi").innerHTML = 'What is the sum of ' + ' ' + a + ' ' + b + '?';
         break;
+        
 
         case 1:
-            a = Math.floor(Math.random() * 101);
-            b = Math.floor(Math.random() * 101);
-            rezultat = a - b;
-        if ( rezultat < 0) {
-            a = Math.floor(Math.random() * 101);
-            b = Math.floor(Math.random() * 101);
-        }
-        else {
-            document.getElementById("brojevi").innerHTML = 'What is the difference of ' + ' ' + a + ' ' + b + '?';
-        }
+            do {
+                a = Math.floor(Math.random() * 101);
+                b = Math.floor(Math.random() * 101);
+               }
+               while ( a < b ) {
+                    document.getElementById("brojevi").innerHTML = 'What is the difference of ' + ' ' + a + ' ' + b + '?';
+                    rezultat = a - b;
+                }
         break;
 
         case 2:
-        a = Math.floor(Math.random() * 10) + 1;
-        b = Math.floor(Math.random() * 10) + 1;
-        rezultat = a * b;
-        document.getElementById("brojevi").innerHTML = 'What is the product of ' + ' ' + a + ' ' + b + '?';
+            a = Math.floor(Math.random() * 10) + 1;
+            b = Math.floor(Math.random() * 10) + 1;
+            rezultat = a * b;
+            document.getElementById("brojevi").innerHTML = 'What is the product of ' + ' ' + a + ' ' + b + '?'; 
         break;
 
         case 3:
-        while (a % b == 0) {
-            a = Math.floor(Math.random() * 101);
-            b = Math.floor(Math.random() * 101);
-            rezultat = a / b;
-            break;
-        }
-        document.getElementById("brojevi").innerHTML = 'What is the quotinet of ' + ' ' + a + ' ' + b + '?';
+            do {
+                a = Math.floor(Math.random() * 201);
+                b = Math.floor(Math.random() * 201);
+            }
+            while (a % b > 0 || b == 0 || a == 0) {
+                rezultat = a / b;
+                document.getElementById("brojevi").innerHTML = 'What is the quotinet of ' + ' ' + a + ' ' + b + '?';
+            }
         break;
     }
     document.getElementById("resenje").innerHTML = "Check result";
     odgovor = 0;
     blokada = 0;
     pomoc = 0;
-    console.log(a, b)
 }
 
 let skup = document.getElementsByClassName("krug");
@@ -100,6 +101,7 @@ function myFunction() {
             j == 0 ? j = 0 : j -= 1;
         }
         pokusaj += 1;
+        ukupnoPokusaja +=1;
     } 
     else {
         skiniPoen = 0;
@@ -111,6 +113,7 @@ function myFunction() {
             odgovor = 1;
             blokada = 1;
             pokusaj += 1;
+            ukupnoPokusaja +=1;
             j +=1;
         }
         else { 
@@ -119,7 +122,7 @@ function myFunction() {
         }
     }
     document.getElementById("demo").innerHTML = text;
-    document.getElementById("pokusaj").innerHTML = 'Total hints' + "<br>" + pokusaj;
+    document.getElementById("pokusaj").innerHTML = 'Hints' + "<br>" + pokusaj;
     document.getElementById("rezultat").innerHTML = 'Your score' + "<br>" + j+'/5';
 
     if(i == 4) {
@@ -131,7 +134,6 @@ function myFunction() {
             document.querySelector(".uNoviLevel").style.display ='block';
         }
     } else {i=i;}
-    console.log(i, j);
 }
 
 function resenje() {
@@ -144,6 +146,12 @@ function resenje() {
 
 
 function prelazakLevela() {
+
+    pokusaj = 0;
+    nivo += 1;
+    level += 1;
+    j = 0;
+
     document.querySelector(".uNoviLevel").style.display ='none';
     document.querySelector(".prvi").style.display = 'none';
     document.querySelector(".result").style.display = 'none';
@@ -159,18 +167,35 @@ function prelazakLevela() {
     prelaz.style.background = "#e8c566";
 
     document.querySelector(".prelazak").style.display = 'block';
-    document.querySelector(".loader").style.display = 'block';
+    document.querySelector(".loadFirst").style.display = 'inline-block';
+    document.querySelector(".loadSecond").style.display = 'inline-block';
+    document.querySelector(".loadThird").style.display = 'inline-block';
 
-    pokusaj = 0;
-    nivo += 1;
-    level += 1;
-    j = 0;
-    setTimeout(sledeciLevel, 5000);
+    if (level < 5) {
+        document.getElementById("loadLevel").innerHTML = 'Next level loading...';
+        setTimeout(sledeciLevel, 5200);
+    }
+    else {
+        level = 1;
+        nivo = 0;
+        ukupnoPokusaja = 0;
+        prelaz.style.paddingTop = (visina-50) + 'px';
+        document.querySelector(".loadFirst").style.display = 'none';
+        document.querySelector(".loadSecond").style.display = 'none';
+        document.querySelector(".loadThird").style.display = 'none';
+        document.getElementById("loadLevel").innerHTML = '';
+        let zbir = ukupnoPokusaja-20;
+        document.getElementById("loadLevel").innerHTML = '“Congratulations and BRAVO!”' + "<br>" + "<br>" + 'Your total hits are: ' + ukupnoPokusaja + "/20" + "<br>" +"which means you made " + zbir + " mistakes!";
+        document.getElementById("playAgain").style.display = 'block';
+        document.getElementById("playAgain").innerHTML = "PLAY AGAIN";
+    }
 }
 
 function sledeciLevel() {
     document.querySelector(".prelazak").style.display = 'none';
-    document.querySelector(".loader").style.display = 'none';
+    document.querySelector(".loadFirst").style.display = 'none';
+    document.querySelector(".loadSecond").style.display = 'none';
+    document.querySelector(".loadThird").style.display = 'none';
 
     document.querySelector(".checkBox").style.display = 'block';
     document.querySelector(".drugi").style.display = 'block';
@@ -187,5 +212,4 @@ function sledeciLevel() {
     i = -1;
     randomBroj();
     randomBroj();
-    console.log(i);
 }
