@@ -11,8 +11,8 @@ let a;                       // random broj
 let b;                       //random broj
 let pokusaj = 0;             // broj pokusaja tokom levela
 let j = 0;                   // upisivanje trenutnog rezultata u polje YOUR SCORE 
-let ukupnoPokusaja = 0;      // totali broj pokusaja u svim levelima
 
+let greske = 0;
 let bezOdgovora = 0;           // ove dve su za brojanje preskoka bez odgovora
 let preskoceno = -1;
 
@@ -26,7 +26,7 @@ document.addEventListener("keyup", function(event) {
 function randomBroj() {
     document.querySelector(".prvi").style.display = 'none';
     document.getElementById("level").innerHTML = ' Level ' + level;
-    document.getElementById("pokusaj").innerHTML = 'Hints' + "<br>" + pokusaj;
+    document.getElementById("pokusaj").innerHTML = 'Wrong answers' + "<br>" + pokusaj;
     document.getElementById("rezultat").innerHTML = 'Your score' + "<br>" + j+'/5';
 
     bezOdgovora == 0 && document.getElementById("numb").value == '' ? preskoceno++ : bezOdgovora == 1;
@@ -81,7 +81,6 @@ function randomBroj() {
     odgovor = 0;
     blokada = 0;
     pomoc = 0;
-    console.log(preskoceno, pokusaj);
 }
 
 let skup = document.getElementsByClassName("krug");
@@ -109,7 +108,6 @@ function myFunction() {
             skiniPoen = 1;
             j == 0 ? j = 0 : j -= 1;
         }
-        ukupnoPokusaja +=1;
         bezOdgovora = 1;
         pokusaj += 1;
     } 
@@ -122,8 +120,6 @@ function myFunction() {
             skup[i].style.backgroundColor = "yellow";
             odgovor = 1;
             blokada = 1;
-            pokusaj += 1;
-            ukupnoPokusaja +=1;
             j +=1;
             bezOdgovora = 1;
         }
@@ -133,7 +129,7 @@ function myFunction() {
         }
     }
     document.getElementById("demo").innerHTML = text;
-    document.getElementById("pokusaj").innerHTML = 'Hints' + "<br>" + pokusaj;
+    document.getElementById("pokusaj").innerHTML = 'Wrong answers' + "<br>" + pokusaj;
     document.getElementById("rezultat").innerHTML = 'Your score' + "<br>" + j+'/5';
 
     if(i == 4) {
@@ -152,17 +148,18 @@ function resenje() {
     let upis = document.getElementById("resenje");
     upis.innerHTML = res;
     pomoc = 1;
-    i == 5 ? upis.innerHTML = 'GO NEXT!' : upis.innerHTML = res;;
+    i == 5 ? upis.innerHTML = 'GO NEXT!' : upis.innerHTML = res;
 }
 
 
 function prelazakLevela() {
 
-    pokusaj = 0;
+    greske = greske + pokusaj;
     nivo += 1;
     level += 1;
     preskoceno = preskoceno - 1;
     j = 0;
+    pokusaj = 0;
 
     document.querySelector(".uNoviLevel").style.display ='none';
     document.querySelector(".prvi").style.display = 'none';
@@ -196,15 +193,13 @@ function prelazakLevela() {
         document.querySelector(".loadSecond").style.display = 'none';
         document.querySelector(".loadThird").style.display = 'none';
         document.getElementById("loadLevel").innerHTML = '';
-        let zbir = ukupnoPokusaja-20;
         document.getElementById("loadLevel").innerHTML = '“Congratulations and BRAVO!”' + "<br>" + "<br>"
-                                                         + 'Your total hints are: ' + ukupnoPokusaja + "/20" + "<br>"
-                                                        +"which means you made " + zbir + " mistakes!" + "<br>"
+                                                         + 'You made ' + greske + " mistakes!" + "<br>"
                                                          +'Times you skiped task without answering: ' + preskoceno;
         document.getElementById("playAgain").style.display = 'block';
         document.getElementById("playAgain").innerHTML = "PLAY AGAIN";
-        ukupnoPokusaja = 0;
         preskoceno = 0;
+        greske = 0;
     }
 }
 

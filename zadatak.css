@@ -67,7 +67,7 @@ body {
     box-sizing:border-box;
 }
 .checkBox {
-    height: 300px;
+    min-height: 300px;
     width: 500px;
     margin: auto;
     text-align: center;
@@ -81,7 +81,7 @@ body {
     display: none;
     border-radius: 5px;
     padding-top: 120px;
-    height: 300px;
+    min-height: 300px;
     width: 500px;
     margin: auto;
     margin-top: 20px;
